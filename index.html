@@ -1,14 +1,195 @@
 <!doctype html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BestellApp</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lieferando Klon- BestellApp</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="./assets/icons/burger-icon.png"
+        />
+        <script src="./script.js" defer></script>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <header id="main-header">
+            <!-- Linker Bereich: Logo-Icon UND Text zusammen -->
+            <div class="header-left">
+                <div class="header-brand">
+                    <img
+                        class="header-logo-icon"
+                        src="assets/icons/takeout_dining_2.svg"
+                        alt="Logo Icon"
+                    />
+                    <img
+                        class="header-text-icon"
+                        src="assets/icons/Bestell APP.svg"
+                        alt="Bestell App"
+                    />
+                </div>
+            </div>
 
-    <script src="./script.js" defer></script>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <h1>HOTPARADIES</h1>
-  </body>
+            <!-- Rechter Bereich: Das einzelne Menü-Icon -->
+            <div class="header-right">
+                <img
+                    class="header-menu-icon"
+                    src="assets/icons/menu.svg"
+                    alt="Menü"
+                />
+            </div>
+        </header>
+        <main class="content-frame">
+            <!-- RESTAURANT-HERO: Banner, Logo und Restaurant-Infos -->
+            <section id="restaurant-hero">
+                <!-- Das große Hintergrundbild/Banner -->
+                <div id="hero-banner">
+                    <!-- Später per CSS als Background-Image oder hier als <img>? -->
+                </div>
+
+                <!-- Das überlappende Restaurant-Logo -->
+                <div id="restaurant-logo-container">
+                    <img
+                        id="restaurant-logo"
+                        src="assets/icons/logo_Burger.svg"
+                        alt="Restaurant Logo"
+                    />
+                </div>
+
+                <!-- Die statischen Restaurant-Informationen -->
+                <div id="restaurant-info">
+                    <h1 id="restaurant-name">Burger & Pizza Paradies</h1>
+
+                    <div class="restaurant-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text"
+                            >(4.8 - 500+ Bewertungen)</span
+                        >
+                    </div>
+
+                    <div class="delivery-details">
+                        <span class="delivery-time">🕒 20-40 Min</span>
+                        <span class="delivery-cost">🛵 Lieferung: 1,50 €</span>
+                        <span class="min-order"
+                            >🛍️ Mindestbestellwert: 15,00 €</span
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <!-----------------------------------------------------------------
+            4. KATEGORIE-NAVIGATION: Horizontale Quicklinks (Aus Figma)
+            ------------------------------------------------------------------->
+            <nav id="category-navigation">
+                <!-- Dieser Container wird später per JavaScript dynamisch gefüllt -->
+                <div id="category-list">
+                    <a href="#category-burger" class="category-item active"
+                        >Burger & Sandwiches</a
+                    >
+                    <a href="#category-pizza" class="category-item"
+                        >Pizza 32cm</a
+                    >
+                    <a href="#category-salate" class="category-item">Salate</a>
+                </div>
+            </nav>
+
+            <!-------------------------------------
+            5. HAUPT-LAYOUT: Zweigeteilter Bereich (Speisekarte links / Warenkorb rechts)
+            --------------------------------------->
+            <div id="main-layout-container">
+                <!-- LINKE SPALTE: Die Speisekarte (Wird später per JS dynamisch befüllt) -->
+                <section id="menu-container">
+                    <!-- Temporärer Platzhalter für die dynamische Gerichteliste -->
+                    <div class="wireframe-placeholder">
+                        <h2>Speisekarte</h2>
+                        <p>
+                            [Hier rendert JavaScript später die Burger, Pizzen
+                            und Salate...]
+                        </p>
+                    </div>
+                </section>
+
+                <!-- RECHTE SPALTE: Der Warenkorb (Auf Desktop "sticky" mitlaufend) -->
+                <aside id="basket-container">
+                    <div class="basket-header">
+                        <h2>Dein Warenkorb</h2>
+                    </div>
+
+                    <!-- Dieser Bereich wird später per JS dynamisch mit Artikeln gefüllt -->
+                    <div id="basket-items-list">
+                        <!-- Platzhalter für leeren Warenkorb laut Figma -->
+                        <p class="empty-basket-text">
+                            Dein Warenkorb ist aktuell leer.
+                        </p>
+                    </div>
+
+                    <!-- Die Summen-Berechnung (Zwischensumme, Lieferkosten, Gesamt) -->
+                    <div class="basket-summary">
+                        <div class="summary-row">
+                            <span>Zwischensumme:</span>
+                            <span id="subtotal-price">0,00 €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Lieferkosten:</span>
+                            <span id="delivery-price">1,50 €</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <strong>Gesamtsumme:</strong>
+                            <strong id="total-price">0,00 €</strong>
+                        </div>
+                    </div>
+
+                    <!-- Der finale Bestell-Button aus Figma -->
+                    <button id="order-button" disabled>
+                        Kostenpflichtig bestellen
+                    </button>
+                </aside>
+            </div>
+            <!-- Ende #main-layout-container -->
+
+
+            <!--------------------------------------------------------------------------
+            ABSCHLUSS & OVERLAYS: Footer, Mobile Nav und Bestell-Bestätigung
+            --------------------------------------------------------------------------->
+
+            <!-- Der Footer: Abschlussleiste ganz unten (100% Breite) -->
+            <footer id="main-footer">
+                <div class="footer-content">
+                    <p>
+                        &copy; 2026 Bestell App Paradies. Alle Rechte
+                        vorbehalten.
+                    </p>
+                    <nav class="footer-links">
+                        <a href="#">Impressum</a> |
+                        <a href="#">Datenschutz</a> |
+                        <a href="#">AGB</a>
+                    </nav>
+                </div>
+            </footer>
+
+            <!-- Mobile Bottom-Navigation: Nur auf Smartphones sichtbar (Sticky ganz unten) -->
+            <nav id="mobile-bottom-nav">
+                <button id="mobile-basket-toggle-btn">
+                    <img src="assets/icons/basket-icon.svg" alt="Warenkorb" />
+                    <span
+                        >Warenkorb (<span id="mobile-basket-count">0</span
+                        >)</span
+                    >
+                </button>
+            </nav>
+
+            <!-- Bestell-Bestätigungs-Overlay: Standardmäßig unsichtbar (hidden) -->
+            <div id="confirmation-overlay" class="hidden">
+                <div class="confirmation-card">
+                    <div class="confirmation-icon">🎉</div>
+                    <h2>Bestellung erfolgreich!</h2>
+                    <p>
+                        Vielen Dank für deinen Einkauf. Dein Essen wird frisch
+                        zubereitet.
+                    </p>
+                    <button id="close-confirmation-btn">Schließen</button>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>

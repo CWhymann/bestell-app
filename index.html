@@ -1,14 +1,199 @@
 <!doctype html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BestellApp</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lieferando Klon - BestellApp</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="./assets/icons/burger-icon.png"
+        />
+        <link rel="stylesheet" href="./style/fonts.css" />
+        <link rel="stylesheet" href="./style.css" />
+        <script src="./scripts/database.js" defer></script>
+        <script src="./script.js" defer></script>
+    </head>
+    <body>
+        <!-- HEADER: 100% Breite mit innerem Inhalts-Kasten -->
+        <header id="main-header">
+            <div class="header-inner-content">
+                <div class="header-left">
+                    <div class="header-brand">
+                        <img
+                            class="header-logo-icon"
+                            src="assets/icons/takeout_dining_2.svg"
+                            alt="Logo Icon"
+                        />
+                        <img
+                            class="header-text-icon"
+                            src="assets/icons/Bestell APP.svg"
+                            alt="Bestell App"
+                        />
+                    </div>
+                </div>
+                <div class="header-right">
+                    <img
+                        class="header-menu-icon"
+                        src="assets/icons/menu.svg"
+                        alt="Menü"
+                    />
+                </div>
+            </div>
+        </header>
 
-    <script src="./script.js" defer></script>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <h1>HOTPARADIES</h1>
-  </body>
+        <!-- MAIN CONTENT FRAME: Begrenzt auf max. 1440px und zentriert -->
+        <main class="content-frame">
+            <!-- RESTAURANT-HERO -->
+            <section id="restaurant-hero">
+                <div id="hero-banner"></div>
+
+                <!-- Logo-Container sitzt ohne absoluten Pixel-Pfusch im Fluss -->
+                <div id="restaurant-logo-container">
+                    <img
+                        id="restaurant-logo"
+                        src="assets/icons/logo_Burger.svg"
+                        alt="Restaurant Logo"
+                    />
+                </div>
+
+                <!-- Statische Infos exakt nach Figma-Inhalt -->
+                <div id="restaurant-info">
+                    <div class="restaurant-title-row">
+                        <h1 id="restaurant-name">
+                            <span class="brand-orange">Burger</span>House
+                        </h1>
+                        <div class="restaurant-rating">
+                            <span class="stars">★</span>
+                            <span class="rating-text">
+                                <span class="rating-score">4,1</span>
+                                <span class="rating-count">(317)</span>
+                            </span>
+                        </div>
+                    </div>
+                    <p class="restaurant-description">
+                        The best of Burgers, Pizza, and Greens, all in one great
+                        place.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ZWEIGETEILTES HAUPT-LAYOUT (Speisekarte links / Warenkorb rechts) -->
+            <div id="main-layout-container">
+                <!-- LINKE SPALTE: Speisekarte mit festen Kategorie-Balken aus Figma -->
+                <section id="menu-container">
+                    <!-- KATEGORIE 1: Burger & Sandwiches -->
+                    <div class="category-header-bar">
+                        <img
+                            class="category-header-icon"
+                            src="assets/icons/category-burger.svg"
+                            alt="Burger Icon"
+                        />
+                        <h2 class="category-header-title">
+                            Burger & Sandwiches
+                        </h2>
+                    </div>
+                    <!-- Dynamischer JS-Anker für die Burger-Karten -->
+                    <div
+                        id="category-section-burger"
+                        class="menu-category-block"
+                    ></div>
+
+                    <!-- KATEGORIE 2: Pizza (30cm) -->
+                    <div class="category-header-bar">
+                        <img
+                            class="category-header-icon"
+                            src="assets/icons/category-pizza.svg"
+                            alt="Pizza Icon"
+                        />
+                        <h2 class="category-header-title">Pizza (30cm)</h2>
+                    </div>
+                    <!-- Dynamischer JS-Anker für die Pizza-Karten -->
+                    <div
+                        id="category-section-pizza"
+                        class="menu-category-block"
+                    ></div>
+
+                    <!-- KATEGORIE 3: Salad -->
+                    <div class="category-header-bar">
+                        <img
+                            class="category-header-icon"
+                            src="assets/icons/category-salad.svg"
+                            alt="Salad Icon"
+                        />
+                        <h2 class="category-header-title">Salad</h2>
+                    </div>
+                    <!-- Dynamischer JS-Anker für die Salat-Karten -->
+                    <div
+                        id="category-section-salad"
+                        class="menu-category-block"
+                    ></div>
+                </section>
+
+                <!-- RECHTE SPALTE: Der Warenkorb (Auf Desktop "sticky" mitlaufend) -->
+                <aside id="basket-container">
+                    <div class="basket-header">
+                        <h2>Your Basket</h2>
+                    </div>
+
+                    <!-- Dieser Bereich wird per JS dynamisch mit Artikeln gefüllt -->
+                    <div id="basket-items-list">
+                        <!-- Platzhalter für leeren Warenkorb -->
+                        <p class="empty-basket-text">
+                            Dein Warenkorb ist aktuell leer.
+                        </p>
+                    </div>
+
+                    <!-- Summen-Berechnung exakt nach Figma-Bezeichnern -->
+                    <div class="basket-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="subtotal-price">0,00 €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Delivery fee:</span>
+                            <span id="delivery-price">4,90 €</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <strong>Total:</strong>
+                            <strong id="total-price">0,00 €</strong>
+                        </div>
+                    </div>
+
+                    <!-- Finaler Bestell-Button -->
+                    <button id="order-button" disabled>Buy now (0,00 €)</button>
+                </aside>
+            </div>
+        </main>
+
+        <!-- FOOTER: 100% Breite mit originalen Figma-Links -->
+        <footer id="main-footer">
+            <div class="footer-inner-content">
+                <span>&copy; 2025 BurgerHouse</span>
+                <a href="#">Imprint</a>
+                <a href="#">Cookie Preferences</a>
+            </div>
+        </footer>
+
+        <!-- Mobile Bottom-Navigation: Bleibt über CSS dauerhaft unten kleben -->
+        <nav id="mobile-bottom-nav" class="mobile-nav-hidden">
+            <button id="mobile-basket-toggle-btn">
+                <img src="assets/icons/basket-icon.svg" alt="Warenkorb" />
+                <span>Warenkorb (<span id="mobile-basket-count">0</span>)</span>
+            </button>
+        </nav>
+
+        <!-- Bestell-Bestätigungs-Overlay: Eigener Custom-Dialog -->
+        <div id="confirmation-overlay" class="overlay-hidden">
+            <div class="confirmation-card">
+                <div class="confirmation-icon">🎉</div>
+                <h2>Bestellung erfolgreich!</h2>
+                <p>
+                    Vielen Dank für deinen Einkauf. Dein Essen wird frisch
+                    zubereitet.
+                </p>
+                <button id="close-confirmation-btn">Schließen</button>
+            </div>
+        </div>
+    </body>
 </html>

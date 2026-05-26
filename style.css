@@ -1,20 +1,491 @@
+/* ------------------------------------------------------------
+   1. ASTERISK RESET (Saubere Nico-Vorlage)
+   ---------------------------------------------------------- */
 * {
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-  box-sizing: border-box;
-  text-decoration: none;
-  position: relative;
-  list-style: none;
-  font-size: inherit;
-  color: inherit;
-  font-family: inherit;
-  background: initial;
-  border: initial;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    text-decoration: none;
+    position: relative;
+    list-style: none;
+    font-size: inherit;
+    color: inherit;
+    font-family: inherit;
+    background: initial;
+    border: initial;
 }
-h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 48px;
+
+/* ------------------------------------------------------------
+   2. GLOBAL BASIS & BODY
+   ---------------------------------------------------------- */
+body {
+    font-family: "Palanquin", "Palanquin Dark", sans-serif;
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* ------------------------------------------------------------
+   3. MAIN HEADER & FOOTER (100% Full Width Struktur)
+   ---------------------------------------------------------- */
+#main-header {
+    width: 100%;
+    background-color: #e76c1f;
+}
+
+.header-inner-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo-icon,
+.header-text-icon,
+.header-menu-icon {
+    display: block;
+    height: 40px;
+    width: auto;
+}
+
+/* ------------------------------------------------------------
+   4. CONTENT BEGRENZUNG
+   ---------------------------------------------------------- */
+.content-frame {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* ------------------------------------------------------------
+   5. RESTAURANT HERO (Flexbox statt absoluter Positionen)
+   ---------------------------------------------------------- */
+#restaurant-hero {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+#hero-banner {
+    width: 100%;
+    height: 300px;
+    background-image: url("assets/img/bg-hero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Die halbe Höhe des Logos als negatives Margin zieht es sauber hoch */
+#restaurant-logo-container {
+    width: 150px;
+    height: 150px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    margin-top: -75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#restaurant-logo {
+    width: 80%;
+    height: auto;
+}
+
+#restaurant-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding-top: 16px;
+}
+
+.restaurant-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+#restaurant-name {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 120%;
+    color: #000000;
+}
+
+.brand-orange {
+    color: #e76c1f;
+}
+
+.restaurant-rating {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: #facaac;
+    padding: 2px 6px;
+    border-radius: 4px;
+    height: 24px;
+}
+
+.restaurant-rating .stars {
+    color: #363534;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+}
+
+.restaurant-rating .rating-text {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.restaurant-rating .rating-score {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: #363534;
+}
+
+.restaurant-rating .rating-count {
+    font-family: "Palanquin", sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: #363534;
+}
+
+.restaurant-description {
+    font-family: "Palanquin", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 120%;
+    color: #000000;
+    max-width: 800px;
+}
+
+/* ------------------------------------------------------------
+   6. KATEGORIE-BALKEN (Direkt in der Speisekarte)
+   ---------------------------------------------------------- */
+.category-header-bar {
+    width: 100%;
+    background-color: #e76c1f;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    margin-top: 32px;
+    margin-bottom: 24px;
+}
+
+.category-header-icon {
+    height: 32px;
+    width: auto;
+    display: block;
+}
+
+.category-header-title {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+/* ------------------------------------------------------------
+   7. HAUPT-LAYOUT (Zweigeteilter Desktop-Bereich)
+   ---------------------------------------------------------- */
+#main-layout-container {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    padding: 0 24px;
+    align-items: flex-start;
+}
+
+#menu-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-category-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* Gerichtekarten */
+.menu-card {
+    display: flex;
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 16px;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.menu-card-img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.menu-card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.menu-card-title {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #000000;
+}
+
+.menu-card-description {
+    font-size: 0.875rem;
+    color: #666666;
+    line-height: 1.4;
+}
+
+.menu-card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    min-width: 100px;
+}
+
+.menu-card-price {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #000000;
+}
+
+.add-to-basket-btn {
+    font-size: 0.8125rem;
+    color: #e76c1f;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* WARENKORB CONTAINER (Dunkles Figma-Design) */
+#basket-container {
+    width: 420px;
+    background-color: #363534;
+    border-radius: 16px;
+    padding: 32px 24px 24px 24px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 24px;
+}
+
+.basket-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.basket-header h2 {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.375rem;
+}
+
+#basket-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.empty-basket-text {
+    text-align: center;
+    color: #aaaaaa;
+    font-size: 0.9375rem;
+}
+
+/* Dynamische Warenkorb-Zeile */
+.basket-item-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.9375rem;
+    border-bottom: 1px solid #4a4948;
+    padding-bottom: 12px;
+}
+
+.basket-item-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.basket-item-controls {
+    display: flex;
+    gap: 12px;
+    color: #aaaaaa;
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+.basket-summary {
+    background-color: #2b2a29;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 0.875rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    color: #cccccc;
+}
+
+.total-row {
+    margin-top: 4px;
+    border-top: 1px solid #4a4948;
+    padding-top: 8px;
+    font-size: 1rem;
+}
+
+.total-row strong {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#order-button {
+    width: 100%;
+    background-color: #e76c1f;
+    color: #ffffff;
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    padding: 14px;
+    border-radius: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#order-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------
+   8. MAIN FOOTER
+   ---------------------------------------------------------- */
+#main-footer {
+    width: 100%;
+    background-color: #e76c1f;
+    margin-top: 60px;
+}
+
+.footer-inner-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.footer-inner-content a {
+    color: #ffffff;
+}
+
+/* ------------------------------------------------------------
+   9. OVERLAYS & STATE MANAGEMENT (Vorbereitung für JS)
+   ---------------------------------------------------------- */
+.overlay-hidden {
+    display: none;
+}
+
+#confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-card {
+    background-color: #363534;
+    color: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-nav-hidden {
+    display: none;
+}
+
+/* ------------------------------------------------------------
+   10. RESPONSIVE DESIGN (Media Queries ab 320px)
+   ---------------------------------------------------------- */
+@media (max-width: 900px) {
+    #main-layout-container {
+        flex-direction: column;
+    }
+
+    #basket-container {
+        display: none; /* Desktop-Warenkorb verschwindet mobil */
+    }
+
+    #mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #363534;
+        padding: 16px;
+        justify-content: center;
+        z-index: 500;
+    }
+
+    #mobile-basket-toggle-btn {
+        background-color: #e76c1f;
+    }
 }

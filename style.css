@@ -4,8 +4,8 @@
 * {
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
     box-sizing: border-box;
+    scroll-behavior: smooth;
     text-decoration: none;
     position: relative;
     list-style: none;
@@ -19,10 +19,19 @@
 /* ------------------------------------------------------------
    2. GLOBAL BASIS & BODY
    ---------------------------------------------------------- */
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
 body {
     font-family: "Palanquin", "Palanquin Dark", sans-serif;
     background-color: #ffffff;
-    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ------------------------------------------------------------
@@ -63,6 +72,7 @@ body {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
+    flex: 1;
 }
 
 /* ------------------------------------------------------------
@@ -79,13 +89,12 @@ body {
 #hero-banner {
     width: 100%;
     height: 300px;
-    background-image: url("assets/img/bg-hero.jpg");
+    background-image: url("assets/img/header-image.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-/* Die halbe Höhe des Logos als negatives Margin zieht es sauber hoch */
 #restaurant-logo-container {
     width: 150px;
     height: 150px;
@@ -185,26 +194,85 @@ body {
    ---------------------------------------------------------- */
 .category-header-bar {
     width: 100%;
-    background-color: #e76c1f;
+    height: 60px;
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 12px 24px;
-    margin-top: 32px;
-    margin-bottom: 24px;
+    padding: 0;
+    margin-top: 54px; /* Mehr Platz für den nach oben ragenden Icon-Überhang (91px hoch bei 60px Bar-Höhe) */
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 10; /* Verhindert Stacking-Probleme und stellt sicher, dass das Band auf Desktop über dem Hintergrund liegt */
+}
+
+/* 
+Erklärung zu Kategoriestreifen über den gesamten Viewport:
+Wenn wir möchten, dass ein inneres Element trotz eines zentrierten Inhaltskastens (content-frame, 1440px) 
+den kompletten Bildschirm von links nach rechts füllt, nutzen wir diesen genialen Best-Practice-Klassiker:
+Wir dehnen ein absolut positioniertes Pseudo-Element (::before) mit unendlichen Negativwerten (-100vw) nach links und rechts aus.
+Der Text und die Icons bleiben so im normalen Fluss und perfekt an den darunterliegenden Gerichtekarten ausgerichtet, 
+während der orangefarbene Balken komplett über den Bildschirm gleitet. 
+*/
+.category-header-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -100vw;
+    right: -100vw;
+    background-color: #e76c1f;
+    z-index: 1; /* Über dem Body-Hintergrund, unter dem Inhalt */
+}
+
+.category-header-content {
+    width: 100%;
+    max-width: 650px; /* Exakt dieselbe Breite wie die Gerichtekarten darunter */
+    margin: 0 auto; /* Perfekt zentriert wie die Gerichtekarten */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 24px; /* Derselbe Gap wie bei den Gerichtekarten */
+    padding: 0 10px; /* Derselbe innere Abstand wie bei den Gerichtekarten */
+    position: relative;
+    z-index: 2; /* Über der orangefarbenen ::before-Fläche */
+}
+
+.category-header-left-space {
+    width: 100px; /* Verschlankt, damit das Icon mehr links sitzt und die Schrift näher herankommt */
+    height: 100%;
+    position: relative;
+    flex-shrink: 0;
 }
 
 .category-header-icon {
-    height: 32px;
-    width: auto;
+    width: 88px;
+    height: 91px;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(
+        -50%
+    ); /* Perfekt positioniert bezüglich der verkleinerten left-space Box */
     display: block;
+    z-index: 5;
 }
 
 .category-header-title {
-    font-family: "Palanquin Dark", sans-serif;
+    font-family: "Palanquin", sans-serif;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 40px;
     color: #ffffff;
+    line-height: 1.1;
+    z-index: 5;
+    margin: 0; /* Keine manuelle Margin-Positionierung mehr nötig, da der Flex-Fluss es perfekt ausrichtet */
+    white-space: nowrap; /* Verhindert ein Umbrechen/Übereinanderstehen des Texts bei langen Titeln */
+}
+
+/* Responsive controls for category titles */
+.category-short {
+    display: none;
+}
+.category-long {
+    display: inline;
 }
 
 /* ------------------------------------------------------------
@@ -227,34 +295,41 @@ body {
 .menu-category-block {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Zentriert die Gerichtekarten auf der linken Seite */
     gap: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
 }
 
 /* Gerichtekarten */
 .menu-card {
     display: flex;
-    background-color: #ffffff;
-    border: 1px solid #f0f0f0;
-    border-radius: 12px;
-    padding: 16px;
-    gap: 20px;
-    align-items: center;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04);
+    background-color: #fdeadc;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 650px;
+    padding: 12px; /* Etwas breiteres und harmonischeres Innenluft-Polster */
+    gap: 24px;
+    align-items: flex-start; /* Aligns all children nicely at the top edge */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    min-height: 145px; /* Mindesthöhe abgestimmt auf 121px hohe Bilder und Padding */
 }
 
 .menu-card-img {
-    width: 120px;
-    height: 90px;
+    width: 207px;
+    height: 121px;
     object-fit: cover;
     border-radius: 8px;
+    flex-shrink: 0;
 }
 
 .menu-card-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
+    align-self: flex-start;
+    padding-top: 4px; /* Perfekter optischer Startpunkt bündig mit Preis und Bild-Oberkante */
 }
 
 .menu-card-title {
@@ -262,20 +337,24 @@ body {
     font-weight: 700;
     font-size: 1.125rem;
     color: #000000;
+    line-height: 1.2;
 }
 
 .menu-card-description {
     font-size: 0.875rem;
     color: #666666;
-    line-height: 1.4;
+    line-height: 1.35;
 }
 
 .menu-card-right {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 12px;
-    min-width: 100px;
+    justify-content: space-between; /* Positioniert den Preis oben am Rand und den Bestell-Button unten rechts */
+    align-self: stretch; /* Füllt die volle Höhe der Elternkarte, um den Button nach unten zu drücken */
+    min-width: 110px;
+    padding-top: 4px; /* Hält den Preis perfekt auf derselben Fluchtlinie wie den Titel */
+    flex-shrink: 0;
 }
 
 .menu-card-price {
@@ -286,72 +365,234 @@ body {
 }
 
 .add-to-basket-btn {
-    font-size: 0.8125rem;
+    font-family: "Palanquin", sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
     color: #e76c1f;
-    font-weight: 600;
+    background-color: #ffffff;
+    border: 1px solid #e76c1f;
+    border-radius: 20px;
+    padding: 6px 16px;
     cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        transform 0.1s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(231, 108, 31, 0.08);
+}
+
+.add-to-basket-btn:hover {
+    background-color: #fffaf7;
+}
+
+.add-to-basket-btn:active {
+    transform: scale(0.97);
 }
 
 /* WARENKORB CONTAINER (Dunkles Figma-Design) */
 #basket-container {
-    width: 420px;
+    width: 360px;
     background-color: #363534;
     border-radius: 16px;
-    padding: 32px 24px 24px 24px;
+    padding: 24px;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     position: sticky;
-    top: 24px;
+    top: 32px; /* Erhält einen eleganten Abstand beim Scrollen */
+    margin-top: 54px; /* Richtet das Element im Ruhezustand absolut bündig an der ersten Kategorie-Bar aus */
+    z-index: 20; /* Liegt elegant über den unendlich breiten Kategoriestreifen */
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 .basket-header {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     margin-bottom: 24px;
+    width: 100%;
 }
 
 .basket-header h2 {
     font-family: "Palanquin Dark", sans-serif;
     font-weight: 700;
-    font-size: 1.375rem;
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Der Schließen-Button im Warenkorb - kreisförmiger, edler Button auf Mobile */
+#basket-close-btn {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: bold;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+#basket-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 
 #basket-items-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     margin-bottom: 24px;
-    max-height: 300px;
+    max-height: 380px; /* Perfekter Grenzwert für ca. 3 Gerichte, danach scrollbar */
     overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Hübsche, schmale Scrollbar für den Warenkorb */
+#basket-items-list::-webkit-scrollbar {
+    width: 6px;
+}
+#basket-items-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+#basket-items-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+#basket-items-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.empty-basket-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 10px;
+    text-align: center;
 }
 
 .empty-basket-text {
-    text-align: center;
     color: #aaaaaa;
     font-size: 0.9375rem;
+    line-height: 1.4;
 }
 
-/* Dynamische Warenkorb-Zeile */
-.basket-item-row {
+/* WARENKORB GERÄTE-KARTE (Weißes, abgerundetes Figma-Design) */
+.basket-item-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 14px 16px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    font-size: 0.9375rem;
-    border-bottom: 1px solid #4a4948;
-    padding-bottom: 12px;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-.basket-item-top {
+.basket-item-card-header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
 }
 
-.basket-item-controls {
+.basket-item-card-title {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: #363534;
+    line-height: 1.3;
+}
+
+.basket-item-delete-btn {
+    background: none;
+    border: none;
+    color: #363534;
+    cursor: pointer;
+    padding: 2px;
     display: flex;
-    gap: 12px;
-    color: #aaaaaa;
-    font-size: 0.875rem;
+    align-items: center;
+    justify-content: center;
+    transition:
+        color 0.15s ease,
+        transform 0.1s ease;
+    flex-shrink: 0;
+}
+
+.basket-item-delete-btn:hover {
+    color: #bc3c25;
+    transform: scale(1.1);
+}
+
+.basket-item-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 4px;
+}
+
+.basket-item-card-price {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: #e76c1f; /* Verleiht dem Preis eine exquisite, appetitliche Farb-Zugehörigkeit */
+}
+
+/* Der Counter unten rechts auf der Karte */
+.basket-item-card-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f5f4f0;
+    border-radius: 20px;
+    padding: 3px 8px;
+    border: 1px solid #e1dbd6;
+}
+
+.basket-counter-btn {
+    background: none;
+    border: none;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: #e76c1f;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.15s ease;
+}
+
+.basket-counter-btn:hover {
+    background-color: #eae7df;
+}
+
+.basket-counter-value {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: #363534;
+    min-width: 14px;
+    text-align: center;
 }
 
 .basket-summary {
@@ -394,6 +635,14 @@ body {
     border-radius: 24px;
     text-align: center;
     cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        transform 0.1s ease;
+}
+
+#order-button:not(:disabled):hover {
+    background-color: #f37d32;
+    transform: translateY(-1px);
 }
 
 #order-button:disabled {
@@ -402,12 +651,12 @@ body {
 }
 
 /* ------------------------------------------------------------
-   8. MAIN FOOTER
+8. MAIN FOOTER
    ---------------------------------------------------------- */
 #main-footer {
     width: 100%;
     background-color: #e76c1f;
-    margin-top: 60px;
+    margin-top: auto; /* Klebt am Seitenende wenn der Inhalt kurz ist */
 }
 
 .footer-inner-content {
@@ -427,65 +676,464 @@ body {
 }
 
 /* ------------------------------------------------------------
-   9. OVERLAYS & STATE MANAGEMENT (Vorbereitung für JS)
+9. OVERLAYS & SUCCESS POPUP (Conforming closely to Figma 'Confi...')
    ---------------------------------------------------------- */
-.overlay-hidden {
-    display: none;
-}
-
 #confirmation-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 2000;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 16px;
+    transition: opacity 0.25s ease;
+}
+
+#confirmation-overlay.overlay-hidden {
+    display: none;
 }
 
 .confirmation-card {
     background-color: #363534;
     color: #ffffff;
-    padding: 32px;
+    padding: 40px 32px 32px 32px;
     border-radius: 16px;
     text-align: center;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.mobile-nav-hidden {
+.confirmation-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: bold;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.confirmation-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.confirmation-icon {
+    font-size: 3.25rem;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
+}
+
+.confirmation-title {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.confirmation-subtitle {
+    font-family: "Palanquin", sans-serif;
+    font-size: 1.0625rem;
+    color: #cccccc;
+    font-weight: 500;
+}
+
+/* Verhindert das Scrollen des Bodys bei offenem Warenkorb-Dialog händisch */
+body.no-scroll {
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Desktop-Spezialität: Mobil-Leiste ausblenden */
+#mobile-bottom-nav {
     display: none;
 }
 
 /* ------------------------------------------------------------
-   10. RESPONSIVE DESIGN (Media Queries ab 320px)
+10. RESPONSIVE DESIGN & MEDIA QUERIES
    ---------------------------------------------------------- */
+
+/* Tablet & mittlere Laptops (Breite zwischen 901px und 1100px) */
+@media (max-width: 1100px) and (min-width: 901px) {
+    #basket-container {
+        width: 310px; /* Schmalerer Warenkorb auf mittleren Bildschirmen */
+        padding: 16px;
+    }
+    #main-layout-container {
+        gap: 20px;
+    }
+    .menu-card {
+        gap: 16px;
+    }
+    .menu-card-img {
+        width: 150px;
+        height: 100px;
+    }
+}
+
+/* Tablets & Smartphones (Unter 900px) */
 @media (max-width: 900px) {
+    /* Absolute Sicherheit vor horizontalem Scrollen auf allen Mobilgeräten */
+    html,
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+        background-color: #f7f6f2; /* Edler Soft-Cream Hintergrund, lässt weiße Karten perfekt hervorstechen */
+    }
+
+    /* Im Header gibt es KEIN Hamburger-Menü mehr laut Figma */
+    .header-menu-icon {
+        display: none;
+    }
+
+    /* Der Header ist kompakter auf Mobilgeräten, besonders für kleine Bildschirme (320px) */
+    .header-inner-content {
+        padding: 10px 16px;
+    }
+
+    .header-logo-icon,
+    .header-text-icon {
+        height: 32px;
+    }
+
+    @media (max-width: 350px) {
+        .header-inner-content {
+            padding: 8px 10px;
+        }
+        .header-logo-icon,
+        .header-text-icon {
+            height: 24px;
+        }
+    }
+
+    /* Das Banner hat einen edlen weißen Rahmen (Rahmen) & abgerundete Ecken, statt vollflächig zu sein */
+    #hero-banner {
+        width: calc(100% - 24px);
+        max-width: 380px;
+        height: 180px;
+        margin: 16px auto 0 auto;
+        border-radius: 16px;
+        border: 4px solid #ffffff;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #restaurant-logo-container {
+        width: 110px;
+        height: 110px;
+        margin-top: -55px;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Umsortierung der Infos: Rating sitzt laut Figma oben, Name darunter, Beschreibung ganz unten */
+    .restaurant-title-row {
+        flex-direction: column-reverse;
+        gap: 6px;
+    }
+
+    #restaurant-name {
+        font-size: 2rem;
+    }
+
+    .restaurant-description {
+        font-size: 1.05rem;
+        padding: 0 16px;
+    }
+
     #main-layout-container {
         flex-direction: column;
+        padding-bottom: 95px; /* Komfort-Abstand für festsitzende Mobilnav */
+        padding-left: 12px;
+        padding-right: 12px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
+    /* Die Kategoriestreifen nutzen die ::before-Fläche für perfektes Full-Width edge-to-edge auf dem Smartphone */
+    .category-header-bar {
+        height: 52px;
+        margin-top: 42px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 10;
+        background-color: transparent; /* Verwendet ::before, um Stacking/Clipping-Bugs sauber zu lösen */
+    }
+
+    .category-header-bar::before {
+        display: block; /* Sichert die volle Breite */
+    }
+
+    .category-header-content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2px;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+        z-index: 2; /* Über der orangefarbenen ::before-Fläche */
+    }
+
+    .category-header-left-space {
+        width: auto;
+        height: auto;
+        margin-top: -26px; /* Zieht das Icon nach oben, sodass es auf dem Balken thront */
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .category-header-icon {
+        width: 44px;
+        height: 44px;
+        position: static;
+        transform: none;
+        display: block;
+        z-index: 10;
+    }
+
+    .category-header-title {
+        font-size: 1.25rem; /* Extrem gut lesbare ~20px */
+        text-align: center;
+        margin: 0;
+        white-space: normal; /* Verhindert das lästige Drücken nach rechts */
+        padding-bottom: 2px;
+    }
+
+    .category-short {
+        display: inline;
+    }
+    .category-long {
+        display: none;
+    }
+
+    /* Der Warenkorb wird auf Mobilgeräten zu einem fabelhaften Full-Screen Dialog */
     #basket-container {
-        display: none; /* Desktop-Warenkorb verschwindet mobil */
+        display: none; /* Im Normalzustand ausgeblendet */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 0;
+        z-index: 999;
+        overflow-y: auto;
+        padding: 16px; /* Komfortabler, etwas kompakterer Rand auf Mobilgeräten */
     }
 
+    #basket-container.mobile-open {
+        display: flex;
+    }
+
+    #basket-close-btn {
+        display: flex; /* Auf Mobilgeräten wird das "X" zum Schließen sichtbar */
+        color: #ffffff;
+    }
+
+    /* Der Footer auf Mobile: Steht über der festsitzenden Leiste am Seitenende */
+    #main-footer {
+        padding-bottom: 94px; /* Ermöglicht Scrollen bis über das mobile Menu hinaus am Seitenende */
+    }
+
+    /* Mobile Bottom-Navigation: Bleibt dauerhaft unten kleben */
     #mobile-bottom-nav {
         display: flex;
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
+        max-width: 100%;
+        height: 70px;
         background-color: #363534;
-        padding: 16px;
-        justify-content: center;
+        border-top: 1px solid #4a4948;
+        justify-content: space-around;
+        align-items: center;
         z-index: 500;
+        padding: 0 16px;
     }
 
-    #mobile-basket-toggle-btn {
+    .mobile-nav-item {
+        background: none;
+        border: none;
+        color: #aaaaaa;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 10px;
+        transition:
+            color 0.15s ease,
+            transform 0.1s ease;
+        position: relative;
+    }
+
+    .mobile-nav-item:active {
+        transform: scale(0.92);
+    }
+
+    .mobile-nav-item.active {
+        color: #e76c1f; /* Orangefarbenes Highlight für den aktiven Menüpunkt */
+    }
+
+    /* Sichert die Größe der eigenen hochgeladenen Icons */
+    .mobile-nav-icon {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* Badge-Stil über der Einkaufstasche */
+    .mobile-basket-button-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-badge {
+        display: none;
+        position: absolute;
+        top: -6px;
+        right: -8px;
         background-color: #e76c1f;
+        color: #ffffff;
+        font-size: 10px;
+        font-family: "Palanquin Dark", sans-serif;
+        font-weight: 700;
+        min-width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid #363534;
+    }
+
+    .nav-badge.has-items {
+        display: flex;
+    }
+}
+
+/* Zusätzliche Optimierungen unter 600px (Sicherer Säulen-Schnitt) */
+@media (max-width: 600px) {
+    /* Die Gerichtekarten bekommen edles Weiß als Hintergrund und abgerundete Ecken exakt wie im Figma */
+    .menu-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        min-height: auto;
+        padding: 12px;
+        background-color: #ffffff; /* Weißer Hintergrund laut Figma */
+        border: 1px solid #e5e3dd;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Kleine Fotos am oberen Kartenrand ("die fotos sind kleiner bei den cards") */
+    .menu-card-img {
+        width: 100%;
+        height: 100px; /* Kleiner gehalten für einen edlen Querstreifen-Look */
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .menu-card-info {
+        padding-top: 0;
+        gap: 4px;
+    }
+
+    /* Preis links, Button rechts auf voller Breite des Gerichtekarten-Bodens */
+    .menu-card-right {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+        min-width: 0;
+        border-top: 1px dashed rgba(231, 108, 31, 0.2);
+        padding-top: 12px;
+        margin-top: 6px;
+    }
+
+    /* Flex-Bereinigungen, damit es zu keinen unschönen Abbrüchen kommt */
+    .menu-card-price {
+        font-size: 1.125rem;
+    }
+
+    .add-to-basket-btn {
+        padding: 6px 14px;
+        font-size: 0.8125rem;
+    }
+
+    /* Auf kleinen Handys stapelt sich der Footer, damit nichts horizontal rausgequetscht wird oder unschön bricht */
+    .footer-inner-content {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 16px;
+    }
+
+    /* Reihenfolge laut Figma: Imprint, Cookie-Preferences, Copyright ganz unten */
+    .footer-inner-content span {
+        order: 3;
+    }
+    .footer-inner-content a:nth-of-type(1) {
+        order: 1; /* Imprint */
+    }
+    .footer-inner-content a:nth-of-type(2) {
+        order: 2; /* Cookie Preferences */
+    }
+}
+
+/* Perfektes, flüssiges Verhalten für Tablet-Breite (zwischen 601px und 900px):
+   Hier schrumpfen wir das Bild und die Gaps leicht, damit die Speisekarte extrem harmonisch aussieht
+   und der Description-Text viel Platz hat! */
+@media (max-width: 900px) and (min-width: 601px) {
+    .menu-card {
+        gap: 16px;
+        padding: 12px;
+    }
+    .menu-card-img {
+        width: 150px; /* Verhindert das Riesenbild auf schmaleren Tablets */
+        height: 100px;
+    }
+    .menu-card-right {
+        min-width: 100px;
     }
 }

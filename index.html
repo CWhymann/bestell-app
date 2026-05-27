@@ -9,7 +9,7 @@
             type="image/x-icon"
             href="./assets/icons/burger-icon.png"
         />
-        <link rel="stylesheet" href="./style/fonts.css" />
+        <link rel="stylesheet" href="./styles/fonts.css" />
         <link rel="stylesheet" href="./style.css" />
         <script src="./scripts/database.js" defer></script>
         <script src="./script.js" defer></script>
@@ -80,18 +80,24 @@
 
             <!-- ZWEIGETEILTES HAUPT-LAYOUT (Speisekarte links / Warenkorb rechts) -->
             <div id="main-layout-container">
-                <!-- LINKE SPALTE: Speisekarte mit festen Kategorie-Balken aus Figma -->
                 <section id="menu-container">
                     <!-- KATEGORIE 1: Burger & Sandwiches -->
                     <div class="category-header-bar">
-                        <img
-                            class="category-header-icon"
-                            src="assets/icons/category-burger.svg"
-                            alt="Burger Icon"
-                        />
-                        <h2 class="category-header-title">
-                            Burger & Sandwiches
-                        </h2>
+                        <div class="category-header-content">
+                            <div class="category-header-left-space">
+                                <img
+                                    class="category-header-icon"
+                                    src="assets/icons/category-burger.svg"
+                                    alt="Burger Icon"
+                                />
+                            </div>
+                            <h2 class="category-header-title">
+                                <span class="category-short">Burger</span>
+                                <span class="category-long"
+                                    >Burger & Sandwiches</span
+                                >
+                            </h2>
+                        </div>
                     </div>
                     <!-- Dynamischer JS-Anker für die Burger-Karten -->
                     <div
@@ -101,12 +107,16 @@
 
                     <!-- KATEGORIE 2: Pizza (30cm) -->
                     <div class="category-header-bar">
-                        <img
-                            class="category-header-icon"
-                            src="assets/icons/category-pizza.svg"
-                            alt="Pizza Icon"
-                        />
-                        <h2 class="category-header-title">Pizza (30cm)</h2>
+                        <div class="category-header-content">
+                            <div class="category-header-left-space">
+                                <img
+                                    class="category-header-icon"
+                                    src="assets/icons/category-pizza.svg"
+                                    alt="Pizza Icon"
+                                />
+                            </div>
+                            <h2 class="category-header-title">Pizza</h2>
+                        </div>
                     </div>
                     <!-- Dynamischer JS-Anker für die Pizza-Karten -->
                     <div
@@ -116,12 +126,16 @@
 
                     <!-- KATEGORIE 3: Salad -->
                     <div class="category-header-bar">
-                        <img
-                            class="category-header-icon"
-                            src="assets/icons/category-salad.svg"
-                            alt="Salad Icon"
-                        />
-                        <h2 class="category-header-title">Salad</h2>
+                        <div class="category-header-content">
+                            <div class="category-header-left-space">
+                                <img
+                                    class="category-header-icon"
+                                    src="assets/icons/category-salad.svg"
+                                    alt="Salad Icon"
+                                />
+                            </div>
+                            <h2 class="category-header-title">Salad</h2>
+                        </div>
                     </div>
                     <!-- Dynamischer JS-Anker für die Salat-Karten -->
                     <div
@@ -134,6 +148,13 @@
                 <aside id="basket-container">
                     <div class="basket-header">
                         <h2>Your Basket</h2>
+                        <!-- Schließen-Button für mobile Dialog-Ansicht -->
+                        <button
+                            id="basket-close-btn"
+                            onclick="toggleMobileBasket('close')"
+                        >
+                            ×
+                        </button>
                     </div>
 
                     <!-- Dieser Bereich wird per JS dynamisch mit Artikeln gefüllt -->
@@ -175,24 +196,89 @@
             </div>
         </footer>
 
-        <!-- Mobile Bottom-Navigation: Bleibt über CSS dauerhaft unten kleben -->
-        <nav id="mobile-bottom-nav" class="mobile-nav-hidden">
-            <button id="mobile-basket-toggle-btn">
-                <img src="assets/icons/basket-icon.svg" alt="Warenkorb" />
-                <span>Warenkorb (<span id="mobile-basket-count">0</span>)</span>
+        <!-- Mobile Bottom-Navigation: Exakte Umsetzung der 4-Icon Navigation laut Figma -->
+        <nav id="mobile-bottom-nav">
+            <button
+                class="mobile-nav-item"
+                aria-label="Home"
+                onclick="scrollToTop()"
+            >
+                <img
+                    class="mobile-nav-icon"
+                    src="assets/icons/home.svg"
+                    alt="Home"
+                />
+            </button>
+            <button class="mobile-nav-item" aria-label="Profile">
+                <img
+                    class="mobile-nav-icon"
+                    src="assets/icons/profil.svg"
+                    alt="Profile"
+                />
+            </button>
+            <button
+                class="mobile-nav-item active"
+                aria-label="Menu"
+                onclick="scrollToMenu()"
+            >
+                <img
+                    class="mobile-nav-icon"
+                    src="assets/icons/bestel_liste.svg"
+                    alt="Menu"
+                />
+            </button>
+            <button
+                class="mobile-nav-item"
+                id="mobile-basket-btn"
+                aria-label="Basket"
+                onclick="toggleMobileBasket('open')"
+            >
+                <div class="mobile-basket-button-wrapper">
+                    <img
+                        class="mobile-nav-icon"
+                        src="assets/icons/basket.svg"
+                        alt="Basket"
+                    />
+                    <span id="mobile-basket-badge" class="nav-badge">0</span>
+                </div>
             </button>
         </nav>
 
         <!-- Bestell-Bestätigungs-Overlay: Eigener Custom-Dialog -->
-        <div id="confirmation-overlay" class="overlay-hidden">
-            <div class="confirmation-card">
-                <div class="confirmation-icon">🎉</div>
-                <h2>Bestellung erfolgreich!</h2>
-                <p>
-                    Vielen Dank für deinen Einkauf. Dein Essen wird frisch
-                    zubereitet.
-                </p>
-                <button id="close-confirmation-btn">Schließen</button>
+        <div
+            id="confirmation-overlay"
+            class="overlay-hidden"
+            onclick="closeConfirmationOverlay()"
+        >
+            <div class="confirmation-card" onclick="event.stopPropagation()">
+                <button
+                    class="confirmation-close-btn"
+                    onclick="closeConfirmationOverlay()"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="confirmation-icon">
+                    <img
+                        class="confirmation-img"
+                        src="assets/icons/DeliveryBus.svg"
+                        alt="Delivery Bus"
+                    />
+                </div>
+                <h2 class="confirmation-title">Order confirmed!</h2>
+                <p class="confirmation-subtitle">Your food is on the way!</p>
             </div>
         </div>
     </body>

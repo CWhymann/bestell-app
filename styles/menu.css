@@ -1,0 +1,192 @@
+/* ------------------------------------------------------------
+   6. KATEGORIE-BALKEN (Direkt an der Speisekarte)
+   ---------------------------------------------------------- */
+.category-header-bar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-top: 54px;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 10;
+}
+
+.category-header-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -100vw;
+    right: -100vw;
+    background-color: #e76c1f;
+    z-index: 1;
+}
+
+.category-header-content {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.category-header-left-space {
+    width: 100px;
+    height: 100%;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.category-header-icon {
+    width: 88px;
+    height: 91px;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    z-index: 5;
+}
+
+.category-header-title {
+    font-family: "Palanquin", sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: #ffffff;
+    line-height: 1.1;
+    z-index: 5;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Responsive controls for category titles */
+.category-short {
+    display: none;
+}
+.category-long {
+    display: inline;
+}
+
+/* ------------------------------------------------------------
+   7. HAUPT-LAYOUT (Zweigeteilter Desktop-Bereich)
+   ---------------------------------------------------------- */
+#main-layout-container {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    padding: 0 24px;
+    align-items: flex-start;
+}
+
+#menu-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-category-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+/* Gerichtekarten */
+.menu-card {
+    display: flex;
+    background-color: #fdeadc;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 650px;
+    padding: 12px;
+    gap: 24px;
+    align-items: flex-start;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    min-height: 145px;
+}
+
+.menu-card-img {
+    width: 207px;
+    height: 121px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.menu-card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-self: flex-start;
+    padding-top: 4px;
+}
+
+.menu-card-title {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #000000;
+    line-height: 1.2;
+}
+
+.menu-card-description {
+    font-size: 0.875rem;
+    color: #666666;
+    line-height: 1.35;
+}
+
+.menu-card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    align-self: stretch;
+    min-width: 110px;
+    padding-top: 4px;
+    flex-shrink: 0;
+}
+
+.menu-card-price {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #000000;
+}
+
+.add-to-basket-btn {
+    font-family: "Palanquin", sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #e76c1f;
+    background-color: #ffffff;
+    border: 1px solid #e76c1f;
+    border-radius: 20px;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        transform 0.1s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(231, 108, 31, 0.08);
+}
+
+.add-to-basket-btn:hover {
+    background-color: #fffaf7;
+}
+
+.add-to-basket-btn:active {
+    transform: scale(0.97);
+}

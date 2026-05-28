@@ -1,0 +1,64 @@
+/* ------------------------------------------------------------
+   3. MAIN HEADER & FOOTER 
+   ---------------------------------------------------------- */
+#main-header {
+    width: 100%;
+    background-color: #e76c1f;
+}
+
+.header-inner-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo-icon,
+.header-text-icon,
+.header-menu-icon {
+    display: block;
+    height: 40px;
+    width: auto;
+}
+/* ------------------------------------------------------------
+   4. CONTENT BEGRENZUNG
+   ---------------------------------------------------------- */
+.content-frame {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+/* ------------------------------------------------------------
+   8. MAIN FOOTER
+   ---------------------------------------------------------- */
+#main-footer {
+    width: 100%;
+    background-color: #e76c1f;
+    margin-top: auto; /* Klebt am Seitenende wenn der Inhalt kurz ist */
+}
+
+.footer-inner-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.footer-inner-content a {
+    color: #ffffff;
+}

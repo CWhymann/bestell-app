@@ -1,0 +1,113 @@
+/* ------------------------------------------------------------
+   5. RESTAURANT HERO
+   ---------------------------------------------------------- */
+#restaurant-hero {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+#hero-banner {
+    width: 100%;
+    height: 300px;
+    background-image: url("../assets/img/header-image.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#restaurant-logo-container {
+    width: 150px;
+    height: 150px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    margin-top: -75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#restaurant-logo {
+    width: 80%;
+    height: auto;
+}
+
+#restaurant-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding-top: 16px;
+}
+
+.restaurant-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+#restaurant-name {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 120%;
+    color: #000000;
+}
+
+.brand-orange {
+    color: #e76c1f;
+}
+
+.restaurant-rating {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: #facaac;
+    padding: 2px 6px;
+    border-radius: 4px;
+    height: 24px;
+}
+
+.restaurant-rating .stars {
+    color: #363534;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+}
+
+.restaurant-rating .rating-text {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.restaurant-rating .rating-score {
+    font-family: "Palanquin Dark", sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: #363534;
+}
+
+.restaurant-rating .rating-count {
+    font-family: "Palanquin", sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: #363534;
+}
+
+.restaurant-description {
+    font-family: "Palanquin", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 120%;
+    color: #000000;
+    max-width: 800px;
+}

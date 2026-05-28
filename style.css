@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------
-   1. ASTERISK RESET (Saubere Nico-Vorlage)
-   ---------------------------------------------------------- */
+   1. ASTERISK RESET 
+   ---------------------------------------------------------- 
 * {
     margin: 0;
     padding: 0;
@@ -18,10 +18,10 @@
 
 /* ------------------------------------------------------------
    2. GLOBAL BASIS & BODY
-   ---------------------------------------------------------- */
+   ---------------------------------------------------------- 
 html,
 body {
-    overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
     max-width: 100%;
 }
@@ -35,8 +35,8 @@ body {
 }
 
 /* ------------------------------------------------------------
-   3. MAIN HEADER & FOOTER (100% Full Width Struktur)
-   ---------------------------------------------------------- */
+   3. MAIN HEADER & FOOTER 
+   ---------------------------------------------------------- 
 #main-header {
     width: 100%;
     background-color: #e76c1f;
@@ -67,7 +67,7 @@ body {
 
 /* ------------------------------------------------------------
    4. CONTENT BEGRENZUNG
-   ---------------------------------------------------------- */
+   ---------------------------------------------------------- 
 .content-frame {
     width: 100%;
     max-width: 1440px;
@@ -76,8 +76,8 @@ body {
 }
 
 /* ------------------------------------------------------------
-   5. RESTAURANT HERO (Flexbox statt absoluter Positionen)
-   ---------------------------------------------------------- */
+   5. RESTAURANT HERO
+   ---------------------------------------------------------- 
 #restaurant-hero {
     width: 100%;
     display: flex;
@@ -190,28 +190,20 @@ body {
 }
 
 /* ------------------------------------------------------------
-   6. KATEGORIE-BALKEN (Direkt in der Speisekarte)
-   ---------------------------------------------------------- */
+   6. KATEGORIE-BALKEN (Direkt an der Speisekarte)
+   ---------------------------------------------------------- 
 .category-header-bar {
     width: 100%;
     height: 60px;
     display: flex;
     align-items: center;
     padding: 0;
-    margin-top: 54px; /* Mehr Platz für den nach oben ragenden Icon-Überhang (91px hoch bei 60px Bar-Höhe) */
+    margin-top: 54px;
     margin-bottom: 22px;
     position: relative;
-    z-index: 10; /* Verhindert Stacking-Probleme und stellt sicher, dass das Band auf Desktop über dem Hintergrund liegt */
+    z-index: 10;
 }
 
-/* 
-Erklärung zu Kategoriestreifen über den gesamten Viewport:
-Wenn wir möchten, dass ein inneres Element trotz eines zentrierten Inhaltskastens (content-frame, 1440px) 
-den kompletten Bildschirm von links nach rechts füllt, nutzen wir diesen genialen Best-Practice-Klassiker:
-Wir dehnen ein absolut positioniertes Pseudo-Element (::before) mit unendlichen Negativwerten (-100vw) nach links und rechts aus.
-Der Text und die Icons bleiben so im normalen Fluss und perfekt an den darunterliegenden Gerichtekarten ausgerichtet, 
-während der orangefarbene Balken komplett über den Bildschirm gleitet. 
-*/
 .category-header-bar::before {
     content: "";
     position: absolute;
@@ -220,24 +212,24 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     left: -100vw;
     right: -100vw;
     background-color: #e76c1f;
-    z-index: 1; /* Über dem Body-Hintergrund, unter dem Inhalt */
+    z-index: 1;
 }
 
 .category-header-content {
     width: 100%;
-    max-width: 650px; /* Exakt dieselbe Breite wie die Gerichtekarten darunter */
-    margin: 0 auto; /* Perfekt zentriert wie die Gerichtekarten */
+    max-width: 650px;
+    margin: 0 auto;
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 24px; /* Derselbe Gap wie bei den Gerichtekarten */
-    padding: 0 10px; /* Derselbe innere Abstand wie bei den Gerichtekarten */
+    gap: 24px;
+    padding: 0 10px;
     position: relative;
-    z-index: 2; /* Über der orangefarbenen ::before-Fläche */
+    z-index: 2;
 }
 
 .category-header-left-space {
-    width: 100px; /* Verschlankt, damit das Icon mehr links sitzt und die Schrift näher herankommt */
+    width: 100px;
     height: 100%;
     position: relative;
     flex-shrink: 0;
@@ -249,9 +241,7 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     position: absolute;
     bottom: 0px;
     left: 50%;
-    transform: translateX(
-        -50%
-    ); /* Perfekt positioniert bezüglich der verkleinerten left-space Box */
+    transform: translateX(-50%);
     display: block;
     z-index: 5;
 }
@@ -263,11 +253,11 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     color: #ffffff;
     line-height: 1.1;
     z-index: 5;
-    margin: 0; /* Keine manuelle Margin-Positionierung mehr nötig, da der Flex-Fluss es perfekt ausrichtet */
-    white-space: nowrap; /* Verhindert ein Umbrechen/Übereinanderstehen des Texts bei langen Titeln */
+    margin: 0;
+    white-space: nowrap;
 }
 
-/* Responsive controls for category titles */
+/* Responsive controls for category titles 
 .category-short {
     display: none;
 }
@@ -277,7 +267,7 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
 
 /* ------------------------------------------------------------
    7. HAUPT-LAYOUT (Zweigeteilter Desktop-Bereich)
-   ---------------------------------------------------------- */
+   ---------------------------------------------------------- 
 #main-layout-container {
     display: flex;
     gap: 40px;
@@ -295,12 +285,12 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
 .menu-category-block {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Zentriert die Gerichtekarten auf der linken Seite */
+    align-items: center;
     gap: 16px;
     margin-bottom: 32px;
 }
 
-/* Gerichtekarten */
+/* Gerichtekarten 
 .menu-card {
     display: flex;
     background-color: #fdeadc;
@@ -308,11 +298,11 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     border-radius: 8px;
     width: 100%;
     max-width: 650px;
-    padding: 12px; /* Etwas breiteres und harmonischeres Innenluft-Polster */
+    padding: 12px;
     gap: 24px;
-    align-items: flex-start; /* Aligns all children nicely at the top edge */
+    align-items: flex-start;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-    min-height: 145px; /* Mindesthöhe abgestimmt auf 121px hohe Bilder und Padding */
+    min-height: 145px;
 }
 
 .menu-card-img {
@@ -329,7 +319,7 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     flex-direction: column;
     gap: 6px;
     align-self: flex-start;
-    padding-top: 4px; /* Perfekter optischer Startpunkt bündig mit Preis und Bild-Oberkante */
+    padding-top: 4px;
 }
 
 .menu-card-title {
@@ -350,10 +340,10 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    justify-content: space-between; /* Positioniert den Preis oben am Rand und den Bestell-Button unten rechts */
-    align-self: stretch; /* Füllt die volle Höhe der Elternkarte, um den Button nach unten zu drücken */
+    justify-content: space-between;
+    align-self: stretch;
     min-width: 110px;
-    padding-top: 4px; /* Hält den Preis perfekt auf derselben Fluchtlinie wie den Titel */
+    padding-top: 4px;
     flex-shrink: 0;
 }
 
@@ -392,7 +382,7 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     transform: scale(0.97);
 }
 
-/* WARENKORB CONTAINER (Dunkles Figma-Design) */
+/* WARENKORB CONTAINER 
 #basket-container {
     width: 360px;
     background-color: #363534;
@@ -402,9 +392,9 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     display: flex;
     flex-direction: column;
     position: sticky;
-    top: 32px; /* Erhält einen eleganten Abstand beim Scrollen */
-    margin-top: 54px; /* Richtet das Element im Ruhezustand absolut bündig an der ersten Kategorie-Bar aus */
-    z-index: 20; /* Liegt elegant über den unendlich breiten Kategoriestreifen */
+    top: 32px;
+    margin-top: 54px;
+    z-index: 20;
     box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -425,7 +415,7 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     text-align: center;
 }
 
-/* Der Schließen-Button im Warenkorb - kreisförmiger, edler Button auf Mobile */
+/* Der Schließen-Button im Warenkorb - kreisförmiger, edler Button auf Mobile 
 #basket-close-btn {
     display: none;
     position: absolute;
@@ -459,12 +449,12 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     flex-direction: column;
     gap: 12px;
     margin-bottom: 24px;
-    max-height: 380px; /* Perfekter Grenzwert für ca. 3 Gerichte, danach scrollbar */
+    max-height: 380px;
     overflow-y: auto;
     padding-right: 4px;
 }
 
-/* Hübsche, schmale Scrollbar für den Warenkorb */
+/* Hübsche, schmale Scrollbar für den Warenkorb 
 #basket-items-list::-webkit-scrollbar {
     width: 6px;
 }
@@ -473,11 +463,11 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     border-radius: 10px;
 }
 #basket-items-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(203, 85, 42, 0.835);
     border-radius: 10px;
 }
 #basket-items-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.778);
 }
 
 .empty-basket-container {
@@ -495,9 +485,9 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     line-height: 1.4;
 }
 
-/* WARENKORB GERÄTE-KARTE (Weißes, abgerundetes Figma-Design) */
+/* WARENKORB GERÄTE-KARTE 
 .basket-item-card {
-    background-color: #ffffff;
+    background-color: #fdeadc;
     border-radius: 10px;
     padding: 14px 16px;
     display: flex;
@@ -524,7 +514,9 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
 .basket-item-delete-btn {
     background: none;
     border: none;
-    color: #363534;
+    font-size: 24px;
+    bottom: 12px;
+    color: #242322;
     cursor: pointer;
     padding: 2px;
     display: flex;
@@ -552,18 +544,18 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     font-family: "Palanquin Dark", sans-serif;
     font-weight: 700;
     font-size: 1.0625rem;
-    color: #e76c1f; /* Verleiht dem Preis eine exquisite, appetitliche Farb-Zugehörigkeit */
+    color: #e76c1f;
 }
 
-/* Der Counter unten rechts auf der Karte */
+/* Der Counter unten rechts auf der Karte 
 .basket-item-card-counter {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: #f5f4f0;
+    background-color: #eeb98e7e;
     border-radius: 20px;
     padding: 3px 8px;
-    border: 1px solid #e1dbd6;
+    border: 1px solid #e76c1f;
 }
 
 .basket-counter-btn {
@@ -574,8 +566,8 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 0.875rem;
+    font-weight: 400;
+    font-size: 1.4rem;
     color: #e76c1f;
     cursor: pointer;
     border-radius: 50%;
@@ -583,14 +575,14 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
 }
 
 .basket-counter-btn:hover {
-    background-color: #eae7df;
+    background-color: #ef802c84;
 }
 
 .basket-counter-value {
     font-family: "Palanquin Dark", sans-serif;
     font-weight: 700;
-    font-size: 0.9375rem;
-    color: #363534;
+    font-size: 1rem;
+    color: #181818a4;
     min-width: 14px;
     text-align: center;
 }
@@ -650,13 +642,16 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     cursor: not-allowed;
 }
 
-/* ------------------------------------------------------------
-8. MAIN FOOTER
-   ---------------------------------------------------------- */
+#mobile-bottom-nav {
+    display: none;
+}
+/*------------------------------------------------------------
+   8. MAIN FOOTER
+   ---------------------------------------------------------- 
 #main-footer {
     width: 100%;
     background-color: #e76c1f;
-    margin-top: auto; /* Klebt am Seitenende wenn der Inhalt kurz ist */
+    margin-top: auto; 
 }
 
 .footer-inner-content {
@@ -676,8 +671,8 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
 }
 
 /* ------------------------------------------------------------
-9. OVERLAYS & SUCCESS POPUP (Conforming closely to Figma 'Confi...')
-   ---------------------------------------------------------- */
+   9. OVERLAYS & SUCCESS POPUP (Conforming closely to Figma 'Confi...')
+   ---------------------------------------------------------- 
 #confirmation-overlay {
     position: fixed;
     top: 0;
@@ -729,7 +724,9 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
 }
 
 .confirmation-close-btn:hover {
@@ -767,25 +764,25 @@ während der orangefarbene Balken komplett über den Bildschirm gleitet.
     font-weight: 500;
 }
 
-/* Verhindert das Scrollen des Bodys bei offenem Warenkorb-Dialog händisch */
+/* Verhindert das Scrollen des Bodys bei offenem Warenkorb-Dialog händisch 
 body.no-scroll {
     overflow: hidden;
     height: 100vh;
 }
 
-/* Desktop-Spezialität: Mobil-Leiste ausblenden */
+/* Desktop-Spezialität: Mobil-Leiste ausblenden 
 #mobile-bottom-nav {
     display: none;
 }
 
 /* ------------------------------------------------------------
-10. RESPONSIVE DESIGN & MEDIA QUERIES
-   ---------------------------------------------------------- */
+   10. RESPONSIVE DESIGN & MEDIA QUERIES
+   ---------------------------------------------------------- 
 
-/* Tablet & mittlere Laptops (Breite zwischen 901px und 1100px) */
+/* Tablet & mittlere Laptops 
 @media (max-width: 1100px) and (min-width: 901px) {
     #basket-container {
-        width: 310px; /* Schmalerer Warenkorb auf mittleren Bildschirmen */
+        width: 310px; /* Schmalerer Warenkorb auf mittleren Bildschirmen 
         padding: 16px;
     }
     #main-layout-container {
@@ -800,27 +797,22 @@ body.no-scroll {
     }
 }
 
-/* Tablets & Smartphones (Unter 900px) */
+/* Tablets & Smartphones (Unter 900px) 
 @media (max-width: 900px) {
-    /* Absolute Sicherheit vor horizontalem Scrollen auf allen Mobilgeräten */
     html,
     body {
         overflow-x: hidden;
         width: 100%;
         max-width: 100%;
-        background-color: #f7f6f2; /* Edler Soft-Cream Hintergrund, lässt weiße Karten perfekt hervorstechen */
+        background-color: #f7f6f2;
     }
-
-    /* Im Header gibt es KEIN Hamburger-Menü mehr laut Figma */
+    /* Im Header KEIN Hamburger-Menü mehr 
     .header-menu-icon {
         display: none;
     }
-
-    /* Der Header ist kompakter auf Mobilgeräten, besonders für kleine Bildschirme (320px) */
     .header-inner-content {
         padding: 10px 16px;
     }
-
     .header-logo-icon,
     .header-text-icon {
         height: 32px;
@@ -836,7 +828,6 @@ body.no-scroll {
         }
     }
 
-    /* Das Banner hat einen edlen weißen Rahmen (Rahmen) & abgerundete Ecken, statt vollflächig zu sein */
     #hero-banner {
         width: calc(100% - 24px);
         max-width: 380px;
@@ -854,7 +845,7 @@ body.no-scroll {
         box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
     }
 
-    /* Umsortierung der Infos: Rating sitzt laut Figma oben, Name darunter, Beschreibung ganz unten */
+    /* Umsortierung der Infos 
     .restaurant-title-row {
         flex-direction: column-reverse;
         gap: 6px;
@@ -871,7 +862,7 @@ body.no-scroll {
 
     #main-layout-container {
         flex-direction: column;
-        padding-bottom: 95px; /* Komfort-Abstand für festsitzende Mobilnav */
+        padding-bottom: 95px;
         padding-left: 12px;
         padding-right: 12px;
         width: 100%;
@@ -879,18 +870,18 @@ body.no-scroll {
         box-sizing: border-box;
     }
 
-    /* Die Kategoriestreifen nutzen die ::before-Fläche für perfektes Full-Width edge-to-edge auf dem Smartphone */
+    /* Die Kategoriestreifen nutzen die ::before-Fläche für perfektes Full-Width edge-to-edge auf dem Smartphone 
     .category-header-bar {
         height: 52px;
         margin-top: 42px;
         margin-bottom: 20px;
         position: relative;
         z-index: 10;
-        background-color: transparent; /* Verwendet ::before, um Stacking/Clipping-Bugs sauber zu lösen */
+        background-color: transparent;
     }
 
     .category-header-bar::before {
-        display: block; /* Sichert die volle Breite */
+        display: block;
     }
 
     .category-header-content {
@@ -902,13 +893,13 @@ body.no-scroll {
         width: 100%;
         max-width: 100%;
         position: relative;
-        z-index: 2; /* Über der orangefarbenen ::before-Fläche */
+        z-index: 2;
     }
 
     .category-header-left-space {
         width: auto;
         height: auto;
-        margin-top: -26px; /* Zieht das Icon nach oben, sodass es auf dem Balken thront */
+        margin-top: -26px;
         margin-bottom: 0;
         display: flex;
         justify-content: center;
@@ -926,10 +917,10 @@ body.no-scroll {
     }
 
     .category-header-title {
-        font-size: 1.25rem; /* Extrem gut lesbare ~20px */
+        font-size: 1.25rem;
         text-align: center;
         margin: 0;
-        white-space: normal; /* Verhindert das lästige Drücken nach rechts */
+        white-space: normal;
         padding-bottom: 2px;
     }
 
@@ -940,9 +931,9 @@ body.no-scroll {
         display: none;
     }
 
-    /* Der Warenkorb wird auf Mobilgeräten zu einem fabelhaften Full-Screen Dialog */
+    /* Der Warenkorb wird auf Mobilgeräten zu einem Full-Screen Dialog 
     #basket-container {
-        display: none; /* Im Normalzustand ausgeblendet */
+        display: none; /* Im Normalzustand ausgeblendet 
         position: fixed;
         top: 0;
         left: 0;
@@ -951,10 +942,10 @@ body.no-scroll {
         max-width: none;
         margin-top: 0;
         margin-bottom: 0;
-        border-radius: 0;
+        border-radius: 20px;
         z-index: 999;
         overflow-y: auto;
-        padding: 16px; /* Komfortabler, etwas kompakterer Rand auf Mobilgeräten */
+        padding: 16px;
     }
 
     #basket-container.mobile-open {
@@ -962,16 +953,15 @@ body.no-scroll {
     }
 
     #basket-close-btn {
-        display: flex; /* Auf Mobilgeräten wird das "X" zum Schließen sichtbar */
+        display: flex;
         color: #ffffff;
     }
 
-    /* Der Footer auf Mobile: Steht über der festsitzenden Leiste am Seitenende */
     #main-footer {
-        padding-bottom: 94px; /* Ermöglicht Scrollen bis über das mobile Menu hinaus am Seitenende */
+        padding-bottom: 94px;
     }
 
-    /* Mobile Bottom-Navigation: Bleibt dauerhaft unten kleben */
+    /* Mobile Bottom-Navigation 
     #mobile-bottom-nav {
         display: flex;
         position: fixed;
@@ -1009,10 +999,10 @@ body.no-scroll {
     }
 
     .mobile-nav-item.active {
-        color: #e76c1f; /* Orangefarbenes Highlight für den aktiven Menüpunkt */
+        color: #e76c1f; /* Orangefarbenes Highlight für den aktiven Menüpunkt 
     }
 
-    /* Sichert die Größe der eigenen hochgeladenen Icons */
+    /* Sichert die Größe der eigenen hochgeladenen Icons 
     .mobile-nav-icon {
         width: 24px;
         height: 24px;
@@ -1020,7 +1010,7 @@ body.no-scroll {
         display: block;
     }
 
-    /* Badge-Stil über der Einkaufstasche */
+    /* Badge-Stil über der Einkaufstasche 
     .mobile-basket-button-wrapper {
         position: relative;
         display: flex;
@@ -1031,45 +1021,45 @@ body.no-scroll {
     .nav-badge {
         display: none;
         position: absolute;
-        top: -6px;
-        right: -8px;
+        top: -12px;
+        right: -12px;
         background-color: #e76c1f;
         color: #ffffff;
-        font-size: 10px;
+        font-size: 16px;
         font-family: "Palanquin Dark", sans-serif;
-        font-weight: 700;
-        min-width: 18px;
-        height: 18px;
+        font-weight: 400;
+        min-width: 24px;
+        height: 24px;
         border-radius: 50%;
         align-items: center;
         justify-content: center;
-        border: 1.5px solid #363534;
+        border: 1px solid #ffffff;
     }
 
     .nav-badge.has-items {
         display: flex;
+        text-align: center;
     }
 }
 
-/* Zusätzliche Optimierungen unter 600px (Sicherer Säulen-Schnitt) */
+/* Zusätzliche Optimierungen unter 600px (Sicherer Säulen-Schnitt) 
 @media (max-width: 600px) {
-    /* Die Gerichtekarten bekommen edles Weiß als Hintergrund und abgerundete Ecken exakt wie im Figma */
     .menu-card {
         flex-direction: column;
         align-items: stretch;
         gap: 12px;
         min-height: auto;
         padding: 12px;
-        background-color: #ffffff; /* Weißer Hintergrund laut Figma */
+        background-color: #fdeadc;
         border: 1px solid #e5e3dd;
         border-radius: 12px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
     }
 
-    /* Kleine Fotos am oberen Kartenrand ("die fotos sind kleiner bei den cards") */
+    /* Kleine Fotos am oberen Kartenrand 
     .menu-card-img {
         width: 100%;
-        height: 100px; /* Kleiner gehalten für einen edlen Querstreifen-Look */
+        height: 100px;
         object-fit: cover;
         border-radius: 6px;
     }
@@ -1079,7 +1069,7 @@ body.no-scroll {
         gap: 4px;
     }
 
-    /* Preis links, Button rechts auf voller Breite des Gerichtekarten-Bodens */
+    /* Preis links, Button rechts auf voller Breite des Gerichtekarten-Bodens 
     .menu-card-right {
         flex-direction: row;
         justify-content: space-between;
@@ -1091,7 +1081,7 @@ body.no-scroll {
         margin-top: 6px;
     }
 
-    /* Flex-Bereinigungen, damit es zu keinen unschönen Abbrüchen kommt */
+    /* Flex-Bereinigungen, damit es zu keinen unschönen Abbrüchen kommt 
     .menu-card-price {
         font-size: 1.125rem;
     }
@@ -1101,7 +1091,7 @@ body.no-scroll {
         font-size: 0.8125rem;
     }
 
-    /* Auf kleinen Handys stapelt sich der Footer, damit nichts horizontal rausgequetscht wird oder unschön bricht */
+    /* Auf kleinen Handys stapelt sich der Footer, damit nichts horizontal rausgequetscht wird oder unschön bricht 
     .footer-inner-content {
         flex-direction: column;
         gap: 12px;
@@ -1109,31 +1099,29 @@ body.no-scroll {
         padding: 16px;
     }
 
-    /* Reihenfolge laut Figma: Imprint, Cookie-Preferences, Copyright ganz unten */
+    /* Reihenfolge laut Figma: Imprint, Cookie-Preferences, Copyright ganz unten 
     .footer-inner-content span {
         order: 3;
     }
     .footer-inner-content a:nth-of-type(1) {
-        order: 1; /* Imprint */
+        order: 1; 
     }
     .footer-inner-content a:nth-of-type(2) {
-        order: 2; /* Cookie Preferences */
+        order: 2; /* Cookie Preferences 
     }
 }
 
-/* Perfektes, flüssiges Verhalten für Tablet-Breite (zwischen 601px und 900px):
-   Hier schrumpfen wir das Bild und die Gaps leicht, damit die Speisekarte extrem harmonisch aussieht
-   und der Description-Text viel Platz hat! */
 @media (max-width: 900px) and (min-width: 601px) {
     .menu-card {
         gap: 16px;
         padding: 12px;
     }
     .menu-card-img {
-        width: 150px; /* Verhindert das Riesenbild auf schmaleren Tablets */
+        width: 150px;
         height: 100px;
     }
     .menu-card-right {
         min-width: 100px;
     }
 }
+*/

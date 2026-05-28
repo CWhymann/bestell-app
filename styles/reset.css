@@ -1,0 +1,35 @@
+/* ------------------------------------------------------------
+   1. ASTERISK RESET 
+   ---------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    text-decoration: none;
+    position: relative;
+    list-style: none;
+    font-size: inherit;
+    color: inherit;
+    font-family: inherit;
+    background: initial;
+    border: initial;
+}
+
+/* ------------------------------------------------------------
+   2. GLOBAL BASIS & BODY
+   ---------------------------------------------------------- */
+html,
+body {
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+}
+
+body {
+    font-family: "Palanquin", "Palanquin Dark", sans-serif;
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
